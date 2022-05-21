@@ -32,6 +32,9 @@ export default {
     }),
 
     async created() {
+      await this.$store.dispatch("grade/getCourses");
+      await this.$store.dispatch("student/getStudents");
+      await this.$store.dispatch("grade/getGrades");
         //await this.$store.dispatch("auth/getSession"); //аутентификация
         //await this.$store.dispatch("auth/getUser"); //получение текущего пользователя (AD login)
     }

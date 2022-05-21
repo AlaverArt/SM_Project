@@ -106,11 +106,5 @@ export default {
             return this.$store.state.grade.grades.filter(grade => !grade.isDelete);
         },
     },
-
-    async mounted() {
-        await this.$store.dispatch("grade/getCourses");
-        await this.$store.dispatch("student/getStudents");
-        await this.$store.dispatch("grade/getGrades");
-    }
 };
 </script>
