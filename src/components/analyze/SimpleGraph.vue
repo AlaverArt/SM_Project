@@ -18,7 +18,7 @@ export default {
   components:{Bar},
   props: {
     chartValues:{
-      type: Object,
+      type: Array,
       default: null
     },
     valueName:{

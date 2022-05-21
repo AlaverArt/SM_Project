@@ -52,7 +52,7 @@ export default {
     computed: {
         drawer: {
             get() {return this.$store.state.drawer},
-            set(value) {this.$store.state.drawer = value}
+            set(value) {this.$store.commit('setDrawer', value)}
         }
     },
 }
