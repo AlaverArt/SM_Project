@@ -1,26 +1,83 @@
+<template>
+  <div>
+    <h1><slot name="title"></slot></h1>
+    <Bar
+        :chart-options="options"
+        :chart-data="chartData"
+    ></Bar>
+  </div>
+</template>
+
 <script>
-import {Bar} from 'vue-chartjs'
+import {Bar} from 'vue-chartjs/legacy'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
 export default {
-  extends: Bar,
+  name:'SimpleGraph',
+  components:{Bar},
   props: {
-    chartData: {
+    chartValues:{
       type: Object,
       default: null
     },
-    options: {
-      type: Object,
-      default: null
+    valueName:{
+      type:String
+    },
+    xKey:{
+      type:String
+    },
+    yKey:{
+      type:String
     }
   },
-  mounted () {
-    this.renderChart(this.chartData, this.options)
-  },
-  watch:{
-    options:{
-      handler(){
-        this.renderChart(this.chartData, this.options);
-      },
-      deep:true
+  computed:{
+    chartData(){
+      return{
+        datasets:[{
+          label:this.valueName,
+          data: this.chartValues,
+          backgroundColor:'#1976d2'
+        }]
+      }
+    },
+    linesColor(){
+      return this.$vuetify.theme.dark ? '#fff' : '#000';
+    },
+    options(){
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins:{
+          legend:{
+            labels:{
+              color:this.linesColor
+            }
+          },
+        },
+        parsing:{
+          xAxisKey:this.xKey,
+          yAxisKey:this.yKey
+        },
+        scales: {
+          x: {
+            grid:{
+              color:this.linesColor
+            },
+            ticks:{
+              color:this.linesColor
+            }
+          },
+          y: {
+            grid:{
+              color:this.linesColor
+            },
+            ticks:{
+              color:this.linesColor
+            }
+          },
+        }
+      }
     }
   }
 }
