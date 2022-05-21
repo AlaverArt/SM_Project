@@ -11,12 +11,19 @@
             <v-toolbar dense>
                 <v-toolbar-title>Таблица грейдов</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn class="primary text-lg-button"
+                <v-btn class="primary text-lg-button mx-2"
                        @click="$store.state.grade.newGradeDialog = true"
                        x-small
                        fab
                 >
                 +</v-btn>
+                <v-btn class="primary text-lg-button"
+                       @click="refreshData"
+                       x-small
+                       fab
+                >
+                  <v-icon>mdi-cached</v-icon>
+                </v-btn>
             </v-toolbar>
         </template>
 
@@ -98,6 +105,12 @@ export default {
 
         initData() {
             this.$store.dispatch("grade/initData");
+        },
+
+        async refreshData(){
+          await this.$store.dispatch("grade/getCourses");
+          await this.$store.dispatch("student/getStudents");
+          await this.$store.dispatch("grade/getGrades");
         }
     },
 

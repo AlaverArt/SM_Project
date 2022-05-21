@@ -15,11 +15,11 @@ export default new Vuex.Store({
 
     mutations: {
         toggleDrawer(state) {state.drawer = !state.drawer},
+        setDrawer(state, value){state.drawer = value},
         setIsLoading(state, flag) {state.isLoading = flag}
     },
 
     actions: {
-
     },
 
     modules: {
