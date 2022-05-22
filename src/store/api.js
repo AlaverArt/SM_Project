@@ -9,7 +9,14 @@ const endpoints = {
 };
 
 export default {    
-    course: () => ReqExec.get(endpoints.course),
+    course: async () => {
+        try{
+            return await ReqExec.get(endpoints.course);
+        } catch (err){
+            console.error("Ошибка загрузки курсов");
+        }
+    },
+    cancelCourse: () => ReqExec.cancel(endpoints.course),
 
     student: async () => {
         try {
@@ -18,6 +25,7 @@ export default {
             console.error("Ошибка загрузки студентов");
         }
     },
+    cancelStudent: () => ReqExec.cancel(endpoints.student),
 
     grade: async () => {
         try {
@@ -26,6 +34,8 @@ export default {
             console.error("Ошибка загрузки грэйдов");
         }
     },
+    cancelGrade: () => ReqExec.cancel(endpoints.grade),
+
     postGrade: async grade => {
         try {
             return await ReqExec.post(endpoints.grade, grade);
@@ -33,6 +43,7 @@ export default {
             console.error("Ошибка создания нового грейда");
         }
     },
+
     putGrade: async (code, grade) => {
         try {
             return await ReqExec.put(endpoints.grade, code, grade);
@@ -40,6 +51,7 @@ export default {
             console.error("Ошибка обновления грейда");
         }
     },
+
     deleteGrade: async code => {
         try {
             return await ReqExec.delete(endpoints.grade, code);
@@ -55,8 +67,7 @@ export default {
             console.error("Ошибка инициализации данных");
         }
     },
-
-    cancelReq: () => ReqExec.cancelReq(),
+    cancelInitData: () => ReqExec.cancel(endpoints.init),
 
     //аутентификация, не изменять
     auth: {

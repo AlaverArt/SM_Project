@@ -17,7 +17,7 @@ class RequestExecutor {
     constructor() {
         this.baseUrl = "";
         this.loadingMask = true; //отключать, если не требуется глобальная маска
-        this.abortController = null;
+        this.controllers = new Map();
         console.info("Request Executor Init!");
     }
 
@@ -70,11 +70,16 @@ class RequestExecutor {
     async execute(url, exact, init, data) {
         if(this.loadingMask) store.commit("setIsLoading", true);
 
+        const location = exact ? url : this.baseUrl + url;
         try {
             if(data) init = {...init, body: JSON.stringify(data)};
-            const location = exact ? url : this.baseUrl + url;
-            this.abortController = new AbortController();
-            init.signal = this.abortController.signal;
+
+            if(this.controllers.get(location))
+                this.controllers.get(location).cancel();
+
+            const controller = new AbortController();
+            this.controllers.set(location, controller);
+            init.signal = controller.signal;
 
             const response = await fetch(location, init);
             //if(!response.ok) throw new Error("Network error!");
@@ -86,15 +91,21 @@ class RequestExecutor {
             throw new Error(error);
 
         } finally {
+            this.controllers.delete(location);
             store.commit("setIsLoading", false);
         }
     }
 
     /**
      * CANCEL REQUEST
+     *
+     * @param url {string} адрес запроса
+     * @param exact {boolean} не подставлять baseUrl
      */
-    cancelReq(){
-        if(this.abortController) this.abortController.abort();
+    cancel(url, exact = false){
+        const location = exact ? url : this.baseUrl + url;
+        const controller = this.controllers.get(location);
+        if(controller !== undefined) controller.abort();
     }
 }
 
