@@ -43,7 +43,7 @@ export default {
                 },
                 {
                     title: "Аналитика",
-                    icon: "mdi-forum",
+                    icon: "mdi-chart-box-outline",
                     route: "/grades_analyze"
                 }
             ],

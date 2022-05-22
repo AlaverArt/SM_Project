@@ -41,12 +41,15 @@ export default {
         datasets:[{
           label:this.valueName,
           data: this.chartValues,
-          backgroundColor:'#6c96d9'
+          backgroundColor: this.barColor
         }]
       }
     },
     linesColor(){
       return this.$vuetify.theme.dark ? '#bbbbbb' : '#5e5e5e';
+    },
+    barColor(){
+      return this.$vuetify.theme.dark ? '#4e79ab' : '#6c96d9';
     },
     options(){
       return {
