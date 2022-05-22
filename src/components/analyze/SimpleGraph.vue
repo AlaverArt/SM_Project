@@ -1,10 +1,14 @@
 <template>
   <div>
-    <h1><slot name="title"></slot></h1>
-    <Bar
-        :chart-options="options"
-        :chart-data="chartData"
-    ></Bar>
+    <v-sheet
+        class="elevation-3 pa-3"
+    >
+      <h1><slot name="title"></slot></h1>
+      <Bar
+          :chart-options="options"
+          :chart-data="chartData"
+      ></Bar>
+    </v-sheet>
   </div>
 </template>
 
