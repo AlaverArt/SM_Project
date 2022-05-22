@@ -1,25 +1,22 @@
 <template>
   <div>
-    <simple-graph
+    <bar-chart
         :chartValues="sortedGrades"
         valueName="Оценка"
         xKey="name"
         yKey="grade"
     >
       <template v-slot:title>Результаты прохождения курса</template>
-    </simple-graph>
+    </bar-chart>
   </div>
 </template>
 
 <script>
-//Перешёл с vue-chartjs-3 на vue-chartjs-4
-//В 4 версии данные и настройки графика по умолчанию реактивны. Необходимость в watcher отпала(но скорее всего у них там свой)
-//Зашил все настройки в simple-graph т.к. разнообразия столбчатых диаграмм пока не планирую
-import SimpleGraph from "@/components/analyze/SimpleGraph";
+import BarChart from "@/components/analyze/BarChart";
   export default {
     name:"GradesAnalyze",
     components:{
-      SimpleGraph
+      BarChart
     },
     computed: {
       actualGrades() {
