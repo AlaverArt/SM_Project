@@ -46,10 +46,13 @@ export default {
       }
     },
     linesColor(){
-      return this.$vuetify.theme.dark ? '#bbbbbb' : '#5e5e5e';
+      return this.$vuetify.theme.dark ? '#9f9f9f' : '#777777';
+    },
+    fontColor(){
+      return this.$vuetify.theme.dark ? '#ffffff' : '#000000';
     },
     barColor(){
-      return this.$vuetify.theme.dark ? '#4e79ab' : '#6c96d9';
+      return this.$vuetify.theme.dark ? '#4382c2' : '#4b88d7';
     },
     options(){
       return {
@@ -58,7 +61,7 @@ export default {
         plugins:{
           legend:{
             labels:{
-              color:this.linesColor
+              color:this.fontColor
             }
           },
         },
@@ -72,7 +75,7 @@ export default {
               color:this.linesColor
             },
             ticks:{
-              color:this.linesColor
+              color:this.fontColor
             }
           },
           y: {
@@ -80,7 +83,7 @@ export default {
               color:this.linesColor
             },
             ticks:{
-              color:this.linesColor
+              color:this.fontColor
             }
           },
         }
