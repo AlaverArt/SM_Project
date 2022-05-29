@@ -3,7 +3,7 @@
     <v-sheet
         class="elevation-3 pa-3"
     >
-      <h1><slot name="title"></slot></h1>
+      <slot name="top"></slot>
       <Bar
           :chart-options="options"
           :chart-data="chartData"

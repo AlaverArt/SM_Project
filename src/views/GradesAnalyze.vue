@@ -6,7 +6,7 @@
         xKey="name"
         yKey="grade"
     >
-      <template v-slot:title>Результаты прохождения курса</template>
+      <template v-slot:top><h1>Результаты прохождения курса</h1></template>
     </bar-chart>
   </div>
 </template>
