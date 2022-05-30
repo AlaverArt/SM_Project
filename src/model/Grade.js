@@ -19,11 +19,17 @@ export default class Grade {
     }
     
     get courseName() {
-        return store.state.grade.courses.get(this.courseCode).name;
+        if(this.courseCode === undefined) return '';
+        const course = store.state.grade.courses.get(this.courseCode);
+        if(course === undefined) return '';
+        return course.name;
     }
 
     get studentName() {
-        return store.state.student.students.get(this.studentCode).fullName;
+        if(this.studentCode === undefined) return '';
+        const student = store.state.student.students.get(this.studentCode);
+        if(student === undefined) return '';
+        return student.fullName;
     }
 
     get formatGradeDate() {

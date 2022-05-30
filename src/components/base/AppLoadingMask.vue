@@ -9,6 +9,7 @@
             indeterminate
             color="light-blue"
         ></v-progress-linear>
+        <v-btn @click="cancelLoadingData">cancel</v-btn>
     </v-dialog>
 </template>
 
@@ -18,9 +19,14 @@ export default {
 
     computed: {
         isLoading: {
-            get() {return this.$store.state.isLoading},
+            get() {return this.$store.getters.isLoading},
             set() {}
         }
+    },
+    methods:{
+      cancelLoadingData(){
+        this.$store.dispatch('cancelLoadingData');
+      }
     }
 }
 </script>

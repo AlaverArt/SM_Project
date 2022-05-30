@@ -26,17 +26,15 @@ export default {
         AppDrawer,
         AppLoadingMask
     },
-
-    data: () => ({
-
-    }),
-
     async created() {
-      await this.$store.dispatch("grade/getCourses");
-      await this.$store.dispatch("student/getStudents");
-      await this.$store.dispatch("grade/getGrades");
-        //await this.$store.dispatch("auth/getSession"); //аутентификация
-        //await this.$store.dispatch("auth/getUser"); //получение текущего пользователя (AD login)
+      await Promise.all([
+          this.$store.dispatch("grade/getCourses"),
+          this.$store.dispatch("student/getStudents"),
+          this.$store.dispatch("grade/getGrades")
+      ])
+
+      //await this.$store.dispatch("auth/getSession"); //аутентификация
+      //await this.$store.dispatch("auth/getUser"); //получение текущего пользователя (AD login)
     }
 }
 </script>

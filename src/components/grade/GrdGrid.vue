@@ -17,12 +17,19 @@
                        fab
                 >
                 +</v-btn>
-                <v-btn class="primary text-lg-button"
+                <v-btn v-if="!isLoading" class="primary text-lg-button"
                        @click="refreshData"
                        x-small
                        fab
                 >
                   <v-icon>mdi-cached</v-icon>
+                </v-btn>
+                <v-btn v-else class="primary text-lg-button"
+                     @click="cancelLoadingData"
+                     x-small
+                     fab
+                >
+                  <v-icon>mdi-cancel</v-icon>
                 </v-btn>
             </v-toolbar>
         </template>
@@ -108,9 +115,14 @@ export default {
         },
 
         async refreshData(){
-          await this.$store.dispatch("grade/getCourses");
-          await this.$store.dispatch("student/getStudents");
-          await this.$store.dispatch("grade/getGrades");
+          await Promise.all([
+            this.$store.dispatch("grade/getCourses"),
+            this.$store.dispatch("student/getStudents"),
+            this.$store.dispatch("grade/getGrades")
+          ])
+        },
+        cancelLoadingData() {
+          this.$store.dispatch('cancelLoadingData');
         }
     },
 
@@ -118,6 +130,9 @@ export default {
         actualGrades() {
             return this.$store.state.grade.grades.filter(grade => !grade.isDelete);
         },
+        isLoading(){
+          return this.$store.getters.isLoading;
+        }
     },
 };
 </script>

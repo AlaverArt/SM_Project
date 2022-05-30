@@ -10,7 +10,8 @@ export default {
 
     mutations: {
         setStudents(state, data) {
-            if(data)
+            if(data) {
+                state.students = new Map();
                 data.forEach(student => {
                     state.students.set(
                         student.code,
@@ -21,12 +22,16 @@ export default {
                         )
                     );
                 });
+            }
         }
     },
 
     actions: {
         async getStudents(context) {
             context.commit('setStudents', await api.student());
+        },
+        cancelGetStudents(){
+            api.cancelStudent();
         }
     }
 }

@@ -15,7 +15,7 @@ export default {
     mutations: {
         setCourses(state, courses) {
             if(courses){
-                state.courses.clear();
+                state.courses = new Map();
                 courses.forEach(course => {
                     state.courses.set(
                         course.code,
@@ -68,17 +68,29 @@ export default {
         async getCourses(context) {
             context.commit('setCourses', await api.course());
         },
+        cancelGetCourses(){
+            api.cancelCourse();
+        },
 
         async getGrades(context) {
             context.commit('setGrades', await api.grade());
+        },
+        cancelGetGrades(){
+            api.cancelGrade();
         },
 
         async postGrade(context, grade) {
             context.commit('postGrade', await api.postGrade(grade));
         },
+        cancelPostGrade(){
+            api.cancelPostGrade();
+        },
 
         async putGrade(context, grade) {
             return await api.putGrade(grade.code, grade);
+        },
+        cancelPutGrade(){
+          api.cancelPutGrade();
         },
 
         async deleteGrade(context, grade) {
@@ -86,9 +98,15 @@ export default {
                 context.commit('deleteGrade', grade);
             }
         },
+        cancelDeleteGrade(){
+          api.cancelDeleteGrade();
+        },
 
         async initData(context) {
             context.commit('setGrades', await api.initData());
+        },
+        cancelInitData(){
+            api.cancelInitData();
         }
     }
 }
