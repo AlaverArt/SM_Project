@@ -29,6 +29,7 @@ export default {
     async created() {
       //Думал одновременная отправка запросов будет быстрее последовательной,
       // но выходит наоборот. Оставил для демонстрации. Пока не понимаю почему.
+      // Хотя аналогичная отправка, но на jsonplaceholder работает хорошо. Возможно сервер что-то не так делает.
       await Promise.allSettled([
           this.$store.dispatch("grade/getCourses"),
           this.$store.dispatch("student/getStudents"),
