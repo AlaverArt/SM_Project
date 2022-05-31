@@ -29,7 +29,7 @@ export default {
     async created() {
       //Думал одновременная отправка запросов будет быстрее последовательной,
       // но выходит наоборот. Оставил для демонстрации. Пока не понимаю почему.
-      await Promise.all([
+      await Promise.allSettled([
           this.$store.dispatch("grade/getCourses"),
           this.$store.dispatch("student/getStudents"),
           this.$store.dispatch("grade/getGrades")
