@@ -18,10 +18,10 @@ export default new Vuex.Store({
         isLoading(state) {
             //Обманываю Vue чтобы он увидел изменеия в Map.
             //Лучше так, чем пересоздавать Map при каждом его изменении
-            let keys = state.isLoadingChangeTracker;
+            let isLoadingValues = state.isLoadingChangeTracker;
 
-            keys = Array.from(state.isLoading.keys());
-            return keys.some(key => state.isLoading.get(key) === true);
+            isLoadingValues = Array.from(state.isLoading.values());
+            return isLoadingValues.some(isLoading => isLoading === true);
         }
     },
 
