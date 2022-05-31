@@ -27,14 +27,14 @@ export default {
         AppLoadingMask
     },
     async created() {
-      //Скорее-всего api на сервере хуже обрабатывает одновременные запросы.
-      // Из-за этого последовательные запросы к этой бд быстрее.
-      // Оставил одновременные запросы для демонстрации.
+      //Думал одновременная отправка запросов будет быстрее последовательной,
+      // но выходит наоборот. Оставил для демонстрации. Пока не понимаю почему.
       await Promise.all([
           this.$store.dispatch("grade/getCourses"),
           this.$store.dispatch("student/getStudents"),
           this.$store.dispatch("grade/getGrades")
       ])
+      console.log('fetched');
 
       //await this.$store.dispatch("auth/getSession"); //аутентификация
       //await this.$store.dispatch("auth/getUser"); //получение текущего пользователя (AD login)
