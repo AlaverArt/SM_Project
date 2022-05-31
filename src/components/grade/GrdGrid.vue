@@ -115,6 +115,9 @@ export default {
         },
 
         async refreshData(){
+          //Скорее-всего api на сервере хуже обрабатывает одновременные запросы.
+          // Из-за этого последовательные запросы к этой бд быстрее.
+          // Оставил одновременные запросы для демонстрации.
           await Promise.all([
             this.$store.dispatch("grade/getCourses"),
             this.$store.dispatch("student/getStudents"),
