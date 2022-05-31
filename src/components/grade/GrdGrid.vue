@@ -56,7 +56,7 @@
             <v-icon @click="deleteItem(item.item)">mdi-delete</v-icon>
         </template>
 
-        <template v-slot:no-data v-if="!$store.state.isLoading">
+        <template v-slot:no-data v-if="!isLoading">
             <v-btn small color="primary" @click="initData">
                 Восстановить данные
             </v-btn>
